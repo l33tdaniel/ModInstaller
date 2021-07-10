@@ -1,6 +1,7 @@
 /* 
- We must find someway to close the program and then open the files that need to be opened
- */
+ We must find some way to close the program and then open the files that need to be opened
+ // as of right now, you're able to launch it as a runnable jar but not as a default one
+ */ 
 package installMods;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -31,7 +32,8 @@ public class MyFrame extends JFrame implements ActionListener{
 		JLabel questionTwo = new JLabel();
 		JLabel questionThree = new JLabel();
 		
-		ImageIcon image = new ImageIcon("javlogo.jpg");
+	
+		ImageIcon image = new ImageIcon(getClass().getResource("/javlogo.jpg"));
 		questionOne.setText("Do you need to download forge?");
 		questionOne.setBounds(535, 0, 200, 200);
 		questionTwo.setText("Do you have the most recent version of java installed?");
@@ -39,13 +41,13 @@ public class MyFrame extends JFrame implements ActionListener{
 		questionThree.setText("Have you downloaded the mods and config?");
 		questionThree.setBounds(495, 400, 320, 200);
 		
-		//label.setText("Do you have forge?");
+		
 		label.setIcon(image);
 		label.setForeground(new Color(0,0,0));
 		label.setIconTextGap(90);
 		label.setBounds(50, 25, 700, 700); //this is setting where you want the label to be
 		
-		frame.setLayout(null); // this cancels out everything we did down here I think
+		//frame.setLayout(null); // this cancels out everything we did down here I think
 		frame.setSize(810,810);
 		frame.setResizable(false); // this can make it where they can't resize
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

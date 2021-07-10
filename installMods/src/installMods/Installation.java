@@ -2,7 +2,13 @@ package installMods;
 
 import java.awt.Desktop;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import javax.swing.ImageIcon;
@@ -38,12 +44,33 @@ public class Installation {
 		}
 	}
 	public void installModsAndConfig() {
-		File Mods = new File("mods");
-		File Config = new File("config");
-		File truePath = new File("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Roaming\\.minecraft\\mods");
-		File truePathTwo = new File("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Roaming\\.minecraft\\config");
-		Mods.renameTo(truePath);
-		Config.renameTo(truePathTwo);
-
+					File sourceConfig = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Downloads\\ModInstaller\\config");
+					File endSourceConfig = new File("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Roaming\\.minecraft\\config");
+				
+					File sourceFile = new File("C:\\Users\\"  + System.getProperty("user.name") + "\\Downloads\\ModInstaller\\mods");
+					File endSource = new File("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Roaming\\.minecraft\\mods");
+					try {
+						sourceConfig.renameTo(endSourceConfig);
+						sourceFile.renameTo(endSource);
+					}
+					catch(Exception e) {
+						System.out.println(e);
+						altInstallModsAndConfig();
+					}	
+					
+	}
+	public void altInstallModsAndConfig() {
+		File sourceConfig = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\ModInstaller\\config");
+		File endSourceConfig = new File("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Roaming\\.minecraft\\config");
+	
+		File sourceFile = new File("C:\\Users\\"  + System.getProperty("user.name") + "\\Desktop\\ModInstaller\\mods");
+		File endSource = new File("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Roaming\\.minecraft\\mods");
+		try {
+			sourceConfig.renameTo(endSourceConfig);
+			sourceFile.renameTo(endSource);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}	
 	}
 }
