@@ -21,6 +21,9 @@ public class MyFrame extends JFrame implements ActionListener{
 	JButton buttonSecondYes;
 	JButton buttonThirdYes;
 	JButton buttonThirdNo;
+	JButton buttonFourthYes;
+	JButton buttonFourthNo;
+	boolean needsMyOptions;
 	boolean needsJava;
 	boolean needsForge;
 	boolean needsConfigOrMods;
@@ -31,16 +34,18 @@ public class MyFrame extends JFrame implements ActionListener{
 		JLabel questionOne = new JLabel();
 		JLabel questionTwo = new JLabel();
 		JLabel questionThree = new JLabel();
+		JLabel questionFour = new JLabel();
 		
 	
 		ImageIcon image = new ImageIcon(getClass().getResource("/javlogo.jpg"));
 		questionOne.setText("Do you need to download forge?");
 		questionOne.setBounds(535, 0, 200, 200);
 		questionTwo.setText("Do you have the most recent version of java installed?");
-		questionTwo.setBounds(470, 200, 320, 200);
-		questionThree.setText("Have you downloaded the mods and config?");
-		questionThree.setBounds(495, 400, 320, 200);
-		
+		questionTwo.setBounds(470, 160, 320, 200);
+		questionThree.setText("Do you need to move the mods and config in?");
+		questionThree.setBounds(495, 300, 320, 200);
+		questionFour.setText("Would you like to use my settings for optimal FPS?");
+		questionFour.setBounds(475, 450, 320, 200);
 		
 		label.setIcon(image);
 		label.setForeground(new Color(0,0,0));
@@ -52,45 +57,56 @@ public class MyFrame extends JFrame implements ActionListener{
 		frame.setResizable(false); // this can make it where they can't resize
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Minecraft mods"); //titles the project. duh
-		frame.setVisible(true); // makes frame visible
 		frame.setIconImage(image.getImage()); // this pulls emma watson in.. (a necessity)
 		frame.getContentPane().setBackground(new Color(220,220,220)); // neutral grey 
 		// setting up the first yes button
 		button  = new JButton();
-		button.setBounds(500, 140, 70, 70);
+		button.setBounds(500, 120, 70, 70);
 		button.addActionListener(this);
 		button.setText("yes");
 		button.setFocusable(false);
 		// setting up the first no button
 		buttonFirstNo = new JButton();
-		buttonFirstNo.setBounds(670, 140, 70, 70);
+		buttonFirstNo.setBounds(670, 120, 70, 70);
 		buttonFirstNo.addActionListener(e -> buttonOneNoWasPressed());
 		buttonFirstNo.setText("no");
 		buttonFirstNo.setFocusable(false);
 		// setting up the second yes button
 		buttonSecondYes  = new JButton();
-		buttonSecondYes.setBounds(500, 340, 70, 70);
+		buttonSecondYes.setBounds(500, 280, 70, 70);
 		buttonSecondYes.addActionListener(e -> buttonTwoYesWasPressed());
 		buttonSecondYes.setText("yes");
 		buttonSecondYes.setFocusable(false);
 		//setting up the second no button
 		buttonSecondNo = new JButton();
-		buttonSecondNo.setBounds(670, 340, 70, 70);
+		buttonSecondNo.setBounds(670, 280, 70, 70);
 		buttonSecondNo.addActionListener(e -> buttonTwoNoWasPressed());
 		buttonSecondNo.setText("no");
 		buttonSecondNo.setFocusable(false);
 		// setting up the third yes button
 		buttonThirdYes  = new JButton();
-		buttonThirdYes.setBounds(500, 540, 70, 70);
+		buttonThirdYes.setBounds(500, 420, 70, 70);
 		buttonThirdYes.addActionListener(e -> buttonThreeYesWasPressed());
 		buttonThirdYes.setText("yes");
 		buttonThirdYes.setFocusable(false);
 		// setting up the third no button
 		buttonThirdNo = new JButton();
-		buttonThirdNo.setBounds(670, 540, 70, 70);
+		buttonThirdNo.setBounds(670, 420, 70, 70);
 		buttonThirdNo.addActionListener(e -> buttonThreeNoWasPressed());
 		buttonThirdNo.setText("no");
 		buttonThirdNo.setFocusable(false);
+		// setting up the fourth yes button
+		buttonFourthYes  = new JButton();
+		buttonFourthYes.setBounds(500, 570, 70, 70);
+		buttonFourthYes.addActionListener(e -> buttonFourYesWasPressed());
+		buttonFourthYes.setText("yes");
+		buttonFourthYes.setFocusable(false);
+		// setting up the fourth no button
+		buttonFourthNo = new JButton();
+		buttonFourthNo.setBounds(670, 570, 70, 70);
+		buttonFourthNo.addActionListener(e -> buttonFourNoWasPressed());
+		buttonFourthNo.setText("no");
+		buttonFourthNo.setFocusable(false);
 		
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -107,6 +123,22 @@ public class MyFrame extends JFrame implements ActionListener{
 		frame.add(questionOne);
 		frame.add(questionTwo);
 		frame.add(questionThree);
+		frame.add(questionFour);
+		frame.add(buttonFourthYes);
+		frame.add(buttonFourthNo);
+		button.setVisible(true);
+		buttonFirstNo.setVisible(true);
+		buttonSecondNo.setVisible(true);
+		buttonThirdYes.setVisible(true);
+		buttonThirdNo.setVisible(true);
+		buttonFourthYes.setVisible(true);
+		buttonFourthNo.setVisible(true);
+		label.setVisible(true);
+		questionOne.setVisible(true);
+		questionTwo.setVisible(true);
+		questionThree.setVisible(true);
+		questionFour.setVisible(true);
+		frame.setVisible(true);
 		
 	}
 	// the code below is what the buttons are calling
@@ -166,29 +198,47 @@ public class MyFrame extends JFrame implements ActionListener{
 		System.out.println("You have designated that you downloaded the mods and config <3");
 		buttonThirdYes.setEnabled(false);
 		buttonThirdNo.setEnabled(false);
-		needsConfigOrMods = false;
+		needsConfigOrMods = true;
 		startInstalls();
 	}
 	public void buttonThreeNoWasPressed() {
 		System.out.println("You have designated that you haven't downloaded the mods and config; \nThe program will now work to download the mods and config");
 		buttonThirdYes.setEnabled(false);
 		buttonThirdNo.setEnabled(false);
-		needsConfigOrMods = true;
+		needsConfigOrMods = false;
 		startInstalls();
 	}
+	public void buttonFourYesWasPressed() {
+		System.out.println("You have designated that you want my options for optimal fps");
+		buttonFourthNo.setEnabled(false);
+		buttonFourthYes.setEnabled(false);
+		needsMyOptions = true;
+		startInstalls();
+	}
+	public void buttonFourNoWasPressed() {
+		System.out.println("You have designated that you don't need the optimal fps");
+		buttonFourthNo.setEnabled(false);
+		buttonFourthYes.setEnabled(false);
+		needsMyOptions = false;
+		startInstalls();
+	}
+	
 	// once all the buttons are pressed, we must close the JFrame and call another process to start running them
 	public void startInstalls() {
-		if(buttonThirdYes.isEnabled() == false && buttonSecondNo.isEnabled() == false && buttonFirstNo.isEnabled() == false) {
+		if(buttonThirdYes.isEnabled() == false && buttonSecondNo.isEnabled() == false && buttonFirstNo.isEnabled() == false && buttonFourthNo.isEnabled() == false) {
 			System.out.println("test");
 			frame.dispose();
 			if(needsConfigOrMods == true) {
-				filesNeeded.installModsAndConfig();
+				filesNeeded.altInstallModsAndConfig();
 			}
 			if(needsJava == true) {
 				filesNeeded.installJava();
 			}
 			if(needsForge == true) {
 				filesNeeded.installForge();
+			}
+			if(needsMyOptions == true) {
+				filesNeeded.installMyOptions();
 			}
 		}
 	}

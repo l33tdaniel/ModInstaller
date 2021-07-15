@@ -43,34 +43,36 @@ public class Installation {
 			installForge();
 		}
 	}
-	public void installModsAndConfig() {
-					File sourceConfig = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Downloads\\ModInstaller\\config");
-					File endSourceConfig = new File("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Roaming\\.minecraft\\config");
-				
-					File sourceFile = new File("C:\\Users\\"  + System.getProperty("user.name") + "\\Downloads\\ModInstaller\\mods");
-					File endSource = new File("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Roaming\\.minecraft\\mods");
-					try {
-						sourceConfig.renameTo(endSourceConfig);
-						sourceFile.renameTo(endSource);
-					}
-					catch(Exception e) {
-						System.out.println(e);
-						altInstallModsAndConfig();
-					}	
-					
-	}
+
 	public void altInstallModsAndConfig() {
-		File sourceConfig = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\ModInstaller\\config");
-		File endSourceConfig = new File("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Roaming\\.minecraft\\config");
+
+		File mods = new File(System.getProperty("user.dir") + "\\mods");
+		File modsEnding = new File("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Roaming\\.minecraft\\mods");
+		File config = new File(System.getProperty("user.dir") + "\\config");
+		File configEnding = new File("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Roaming\\.minecraft\\config");
 	
-		File sourceFile = new File("C:\\Users\\"  + System.getProperty("user.name") + "\\Desktop\\ModInstaller\\mods");
-		File endSource = new File("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Roaming\\.minecraft\\mods");
 		try {
-			sourceConfig.renameTo(endSourceConfig);
-			sourceFile.renameTo(endSource);
+			Files.move(mods.toPath(), modsEnding.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			Files.move(config.toPath(), configEnding.toPath(), StandardCopyOption.REPLACE_EXISTING);
 		}
 		catch(Exception e) {
 			System.out.println(e);
-		}	
+		}
+	}
+	// THIS WORKS!
+	public void installMyOptions() {
+		File source = new File(System.getProperty("user.dir") + "\\options.txt");
+		File endSource = new File("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Roaming\\.minecraft\\options.txt");
+		File optifine = new File(System.getProperty("user.dir") + "\\optionsof.txt");
+		File endOptifine = new File("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Roaming\\.minecraft\\optionsof.txt");
+		
+		//source.renameTo(endSource);
+		try {
+			Files.move(source.toPath(), endSource.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			Files.move(optifine.toPath(), endOptifine.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
 	}
 }
