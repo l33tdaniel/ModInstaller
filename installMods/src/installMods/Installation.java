@@ -1,6 +1,7 @@
 package installMods;
 
 import java.awt.Desktop;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,6 +13,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import javax.swing.ImageIcon;
+
+import org.apache.commons.io.FileUtils;
 // do we have some way to make sure that we download java before forge?
 public class Installation {
 
@@ -52,9 +55,27 @@ public class Installation {
 		File configEnding = new File("C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Roaming\\.minecraft\\config");
 	
 		try {
-			Files.move(mods.toPath(), modsEnding.toPath(), StandardCopyOption.REPLACE_EXISTING);
-			Files.move(config.toPath(), configEnding.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			if(!modsEnding.exists() && !configEnding.exists()){
+				FileUtils.copyDirectory(mods, modsEnding);
+				FileUtils.copyDirectory(config, configEnding);
+			}
+			else {
+				String[]entries = modsEnding.list();
+				for(String s: entries){
+				    File currentFile = new File(modsEnding.getPath(), s);
+				    currentFile.delete();
+				}
+				String[]noobs = configEnding.list();
+				for(String s: noobs){
+				    File currentFile = new File(modsEnding.getPath(), s);
+				    currentFile.delete();
+				}
+			
+				FileUtils.copyDirectory(mods, modsEnding);
+				FileUtils.copyDirectory(config, configEnding);
+			}
 		}
+		// this didn't work for jackson when he already had his files in there
 		catch(Exception e) {
 			System.out.println(e);
 		}
@@ -68,8 +89,8 @@ public class Installation {
 		
 		//source.renameTo(endSource);
 		try {
-			Files.move(source.toPath(), endSource.toPath(), StandardCopyOption.REPLACE_EXISTING);
-			Files.move(optifine.toPath(), endOptifine.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			FileUtils.copyDirectory(source, endSource);
+			FileUtils.copyDirectory(optifine, endOptifine);
 		}
 		catch(Exception e) {
 			System.out.println(e);
