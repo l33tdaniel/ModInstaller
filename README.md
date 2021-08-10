@@ -9,4 +9,6 @@ For the full usage of the application, you'll have to have the following items i
   *  config folder (must be lowercased, otherwise Minecraft won't accept it.)
   *  options.txt
   *  optionsof.txt
+
+
 As of 8/9/21, the download link for the ModInstaller + all included config/mods can be found [here.](https://www.mediafire.com/file/lixskhxkji5kzy9/ModInstaller.zip/file)
